@@ -1,0 +1,380 @@
+{
+	"info": {
+		"_postman_id": "9b5f7fd0-6682-49cc-8ba7-a9e0ce04b1a5",
+		"name": "MyOwnAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44749775"
+	},
+	"item": [
+		{
+			"name": "GetAllData",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSingleData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\" , () =>\r",
+							"{\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code 200 or 201\",()=>\r",
+							"{\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201])  \r",
+							"});\r",
+							"\r",
+							"pm.test(\"status code name has String\", () =>\r",
+							"{\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Conten-type Header is present\",() =>\r",
+							"{\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\",() => {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Cookie is Language is present\",() =>\r",
+							"{\r",
+							"    //pm.expect(pm.cookies.has(\"Language\")).to.be.true;\r",
+							"}\r",
+							");\r",
+							"\r",
+							"pm.test(\"Cookie is Language has English\",() =>{\r",
+							"   // pm.expect(pm.cookies.get(\"Language\")).to.eql(\"English\");\r",
+							"}\r",
+							");\r",
+							"\r",
+							"pm.test(\"Response time is less than 50ms\",() =>{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(50);\r",
+							"}\r",
+							");\r",
+							"\r",
+							"const jsonData = pm.response.json();\r",
+							"pm.test(\"Test data type of response\",() =>{\r",
+							"    pm.expect(jsonData).to.be.an('object');\r",
+							"    pm.expect(jsonData.id).to.be.a(\"string\");\r",
+							"    pm.expect(jsonData.name).to.be.a('string');\r",
+							"    pm.expect(jsonData.email).to.be.a('string');\r",
+							"    pm.expect(jsonData.role).to.be.a('string');\r",
+							"    pm.expect(jsonData.active).to.be.a('boolean');\r",
+							"    pm.expect(jsonData.age).to.be.an('array');\r",
+							"    pm.expect(jsonData.amount).to.be.a('number');\r",
+							"    pm.expect(jsonData.courses).to.be.an('array');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test array Properties\",() =>{\r",
+							"    pm.expect(jsonData.courses).to.include(\"Java\");\r",
+							"    pm.expect(jsonData.age).to.include(28);\r",
+							"    pm.expect(jsonData.courses).to.have.members([\"Java\",\"API\",\"Selenium\"]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Test object properties\",() =>{\r",
+							"    pm.expect(jsonData.id).to.eql(\"1\");\r",
+							"    pm.expect(jsonData.name).to.eql(\"Alice Johnson\");\r",
+							"    pm.expect(jsonData.email).to.eql(\"alice@example.com\");\r",
+							"    pm.expect(jsonData.role).to.eql(\"admin\");\r",
+							"    pm.expect(jsonData.active).to.eql(true);\r",
+							"    pm.expect(jsonData.amount).to.eql(2000);\r",
+							"    pm.expect(jsonData.courses[0]).to.eql(\"Java\");\r",
+							"    pm.expect(jsonData.courses[1]).to.eql(\"API\");\r",
+							"    pm.expect(jsonData.courses[2]).to.eql(\"Selenium\");\r",
+							"    pm.expect(jsonData.age[0]).to.eql(27);\r",
+							"    pm.expect(jsonData.age[1]).to.eql(28);\r",
+							"});\r",
+							"\r",
+							"var jsonSchema = {\r",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"id\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"name\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"email\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"role\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"active\": {\r",
+							"      \"type\": \"boolean\"\r",
+							"    },\r",
+							"    \"age\": {\r",
+							"      \"type\": \"array\",\r",
+							"      \"items\": [\r",
+							"        {\r",
+							"          \"type\": \"integer\"\r",
+							"        },\r",
+							"        {\r",
+							"          \"type\": \"integer\"\r",
+							"        }\r",
+							"      ]\r",
+							"    },\r",
+							"    \"amount\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"courses\": {\r",
+							"      \"type\": \"array\",\r",
+							"      \"items\": [\r",
+							"        {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        {\r",
+							"          \"type\": \"string\"\r",
+							"        }\r",
+							"      ]\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"id\",\r",
+							"    \"name\",\r",
+							"    \"email\",\r",
+							"    \"role\",\r",
+							"    \"active\",\r",
+							"    \"age\",\r",
+							"    \"amount\",\r",
+							"    \"courses\"\r",
+							"  ]\r",
+							"}\r",
+							"var tv4 = require('tv4'); \r",
+							"// Assuming tv4 is a valid module for JSON schema validation.\r",
+							"pm.test(\"Schema is valid\",() =>{\r",
+							"    pm.expect(tv4.validate(jsonData, jsonSchema)).to.be.true;\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\" , () =>\r",
+							"{\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"7\",\r\n    \"name\": \"Bhagwan Kagade\",\r\n    \"email\": \"Bhagwan@example.com\",\r\n    \"role\": \"QA Engineer\",\r\n    \"active\": true,\r\n    \"age\": [\r\n        27,\r\n        28\r\n    ],\r\n    \"amount\": 2000,\r\n    \"courses\": [\r\n        \"Java\",\r\n        \"API\",\r\n        \"Selenium\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\" , () =>\r",
+							"{\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"id\": \"7\",\r\n        \"name\": \"Aarav Kagade\",\r\n        \"email\": \"Aarav@example.com\",\r\n        \"role\": \"QA Engineer\",\r\n        \"active\": true\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\" , () =>\r",
+							"{\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n\r\n        \"name\": \"Rani Kagade\",\r\n        \"email\": \"Rani@example.com\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\" , () =>\r",
+							"{\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/users/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

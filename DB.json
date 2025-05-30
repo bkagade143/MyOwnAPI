@@ -1,0 +1,49 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Alice Johnson",
+      "email": "alice@example.com",
+      "role": "admin",
+      "active": true,
+      "age": [
+        27,
+        28
+      ],
+      "amount": 2000,
+      "courses": [
+        "Java",
+        "API",
+        "Selenium"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Bob Smith",
+      "email": "bob@example.com",
+      "role": "user",
+      "active": false
+    },
+    {
+      "id": "3",
+      "name": "Charlie Brown",
+      "email": "charlie@example.com",
+      "role": "user",
+      "active": true
+    },
+    {
+      "id": "4",
+      "name": "Bhagwan Kagade",
+      "email": "Bhagwan@example.com",
+      "role": "QA Engineer",
+      "active": true
+    },
+    {
+      "id": "5",
+      "name": "Aarav Kagade",
+      "email": "Aarav@example.com",
+      "role": "QA Engineer",
+      "active": true
+    }
+  ]
+}
